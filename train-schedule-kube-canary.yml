@@ -14,11 +14,11 @@ spec:
 
 ---
 
-apiVersion: extension/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: train-schedule-deployment-canary
-  labels: 
+  labels:
     app: train-schedule
 spec:
   replicas: $CANARY_REPLICAS
@@ -34,11 +34,11 @@ spec:
     spec:
       containers:
       - name: train-schedule
-        image: $DOCKER_IMAGE_NAME: $BUILD_NUMBER
+        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
         ports:
         - containerPort: 8080
         livenessProbe:
-          httpGet: 
+          httpGet:
             path: /
             port: 8080
           initialDelaySeconds: 15
